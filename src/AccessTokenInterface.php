@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace Fan\DouYin\OpenApi;
 
+use JetBrains\PhpStorm\ArrayShape;
+
 interface AccessTokenInterface
 {
     public function getUri(): string;
@@ -20,5 +22,6 @@ interface AccessTokenInterface
 
     public function getHeaders(): array;
 
+    #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int', 'expired_at' => 'int'])]
     public function store(array $token): array;
 }

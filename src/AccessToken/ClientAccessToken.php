@@ -46,6 +46,7 @@ class ClientAccessToken extends AccessToken
         return [];
     }
 
+    #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int', 'expired_at' => 'int'])]
     public function store(array $token): array
     {
         // TODO: Implement store() method.

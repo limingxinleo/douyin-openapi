@@ -38,13 +38,15 @@ class TouTiaoAccessToken extends AccessToken
         ];
     }
 
-    #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int'])]
+    #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int', 'expired_at' => 'int'])]
     public function getToken(bool $fresh = false): array
     {
         $result = null;
         if (! $fresh) {
             $result = $this->cache()->get($this->storeKey(self::getName()));
-            var_dump($result);
+            if ($result['expired_at'] < time()) {
+                $result = null;
+            }
         }
 
         if (! $result) {
@@ -72,11 +74,16 @@ class TouTiaoAccessToken extends AccessToken
         ];
     }
 
+    #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int', 'expired_at' => 'int'])]
     public function store(
         #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int'])]
         array $token
     ): array {
-        $this->cache()->set($this->storeKey(self::getName()), $token, $token['expires_in'] - 600);
+        $expiresIn = $token['expires_in'] - 600;
+
+        $token = array_merge($token, ['expired_at' => time() + $expiresIn]);
+
+        $this->cache()->set($this->storeKey(self::getName()), $token, $expiresIn);
 
         return $token;
     }
