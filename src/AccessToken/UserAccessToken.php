@@ -28,4 +28,9 @@ class UserAccessToken extends AccessToken
     {
         return [];
     }
+
+    public function getHeaders(): array
+    {
+        return [];
+    }
 }

@@ -45,4 +45,9 @@ class ClientAccessToken extends AccessToken
 
         return $result['access_token'];
     }
+
+    public function getHeaders(): array
+    {
+        return [];
+    }
 }

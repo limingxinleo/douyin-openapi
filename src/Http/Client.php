@@ -18,10 +18,9 @@ use Fan\DouYin\OpenApi\ProviderInterface;
 use GuzzleHttp;
 use GuzzleHttp\RequestOptions;
 use Hyperf\Codec\Json;
+use JetBrains\PhpStorm\ArrayShape;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
-
-use function Hyperf\Support\make;
 
 class Client implements ProviderInterface
 {
@@ -29,14 +28,21 @@ class Client implements ProviderInterface
     {
     }
 
-    public function client(?AccessTokenInterface $token = null): GuzzleHttp\Client
-    {
+    public function client(
+        ?AccessTokenInterface $token = null,
+        #[ArrayShape([
+            'base_uri' => 'string',
+            'timeout' => 'int',
+            'http_errors' => 'boolean',
+        ])]
+        array $options = []
+    ): GuzzleHttp\Client {
         $config = $this->config;
         if ($token) {
-            $config[RequestOptions::HEADERS]['Authorization'] = 'Bearer ' . $token->getToken();
+            $config[RequestOptions::HEADERS] = array_replace($config[RequestOptions::HEADERS] ?? [], $token->getHeaders());
         }
 
-        return make(GuzzleHttp\Client::class, [$config]);
+        return new GuzzleHttp\Client(array_replace_recursive($config, $options));
     }
 
     public function handleResponse(ResponseInterface $response): array

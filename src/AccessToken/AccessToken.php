@@ -17,6 +17,7 @@ use Fan\DouYin\OpenApi\Config\Config;
 use Fan\DouYin\OpenApi\Http\Client;
 use Fan\DouYin\OpenApi\ProviderInterface;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class AccessToken implements AccessTokenInterface, ProviderInterface
 {
@@ -30,6 +31,11 @@ abstract class AccessToken implements AccessTokenInterface, ProviderInterface
             RequestOptions::JSON => $this->buildOAuthBody(),
         ]);
 
+        return $this->handleResponse($response);
+    }
+
+    public function handleResponse(ResponseInterface $response): array
+    {
         return $this->client->handleResponse($response);
     }
 }

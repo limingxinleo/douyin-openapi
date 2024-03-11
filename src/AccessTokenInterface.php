@@ -17,4 +17,6 @@ interface AccessTokenInterface
     public function getUri(): string;
 
     public function buildOAuthBody(): array;
+
+    public function getHeaders(): array;
 }
