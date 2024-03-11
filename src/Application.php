@@ -21,6 +21,7 @@ use Pimple\Container;
  * @property Config\Config $config
  * @property AccessToken\ClientAccessToken $client_access_token
  * @property AccessToken\UserAccessToken $user_access_token
+ * @property Http\Client $http
  */
 class Application
 {
@@ -56,5 +57,10 @@ class Application
     public function __get(string $name)
     {
         return $this->container[$name] ?? null;
+    }
+
+    public function __set(string $name, mixed $callback)
+    {
+        $this->container[$name] = $callback;
     }
 }
