@@ -17,6 +17,13 @@ use JetBrains\PhpStorm\ArrayShape;
 
 class Config implements ProviderInterface
 {
+    protected array $config = [
+        'http' => [
+            'base_uri' => 'https://open.douyin.com',
+            'timeout' => 5,
+        ],
+    ];
+
     public function __construct(
         #[ArrayShape([
             'client_key' => 'string',
@@ -27,8 +34,9 @@ class Config implements ProviderInterface
                 'http_errors' => 'boolean',
             ],
         ])]
-        protected array $config
+        array $config
     ) {
+        $this->config = array_replace_recursive($this->config, $config);
     }
 
     public function getClientKey(): string

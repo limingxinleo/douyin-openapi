@@ -25,11 +25,16 @@ class ConfigTest extends AbstractTestCase
         $config = [
             'client_key' => 'xxx',
             'client_secret' => 'xxxxxx',
+            'http' => [
+                'timeout' => 10,
+            ],
         ];
 
         $application = new Application($config);
 
         $this->assertSame('xxx', $application->config->getClientKey());
         $this->assertSame('xxxxxx', $application->config->getClientSecret());
+        $this->assertSame('https://open.douyin.com', $application->config->getHttp()['base_uri']);
+        $this->assertSame(10, $application->config->getHttp()['timeout']);
     }
 }
