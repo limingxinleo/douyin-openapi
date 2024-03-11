@@ -16,7 +16,7 @@ class ClientAccessToken extends AccessToken
 {
     public static function getName(): string
     {
-        return 'tenant_access_token';
+        return 'client_access_token';
     }
 
     public function getUri(): string

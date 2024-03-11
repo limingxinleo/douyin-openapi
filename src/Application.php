@@ -12,17 +12,23 @@ declare(strict_types=1);
 
 namespace Fan\DouYin\OpenApi;
 
+use Fan\DouYin\OpenApi\AccessToken\AccessTokenProvider;
+use Fan\DouYin\OpenApi\Http\ClientProvider;
 use JetBrains\PhpStorm\ArrayShape;
 use Pimple\Container;
 
 /**
  * @property Config\Config $config
+ * @property AccessToken\ClientAccessToken $client_access_token
+ * @property AccessToken\UserAccessToken $user_access_token
  */
 class Application
 {
     private Container $container;
 
     private array $providers = [
+        AccessTokenProvider::class,
+        ClientProvider::class,
     ];
 
     public function __construct(
@@ -39,7 +45,7 @@ class Application
     ) {
         $config = new Config\Config($config);
         $this->container = new Container([
-            'config' => $config,
+            Config\Config::getName() => $config,
         ]);
 
         foreach ($this->providers as $provider) {
