@@ -51,6 +51,9 @@
     "extra": {
         "hyperf": {
             "config": "Fan\\DouYin\\OpenApi\\ConfigProvider"
+        },
+        "branch-alias": {
+            "dev-master": "0.1-dev"
         }
     }
 }
