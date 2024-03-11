@@ -27,7 +27,7 @@ class AccessTokenTest extends AbstractTestCase
 
         $token = $application->client_access_token->getToken();
 
-        $this->assertSame('clt.0cafbd032b7211ab4023043e0a75c5aa3hBvmjK7dfwZiFz1C255GPrk7i', $token);
+        $this->assertSame('clt.0cafbd032b7211ab4023043e0a75c5aa3hBvmjK7dfwZiFz1C255GPrk7i', $token['access_token']);
     }
 
     public function testWebCastMateInfo()

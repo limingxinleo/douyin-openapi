@@ -12,8 +12,6 @@ declare(strict_types=1);
 
 namespace Fan\DouYin\OpenApi\AccessToken;
 
-use Fan\DouYin\OpenApi\Config\Config;
-use Fan\DouYin\OpenApi\Http\Client;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -21,19 +19,10 @@ class AccessTokenProvider implements ServiceProviderInterface
 {
     public function register(Container $pimple)
     {
-        $pimple[UserAccessToken::getName()] = fn () => new UserAccessToken(
-            $pimple[Config::getName()],
-            $pimple[Client::getName()]
-        );
+        $pimple[UserAccessToken::getName()] = fn () => new UserAccessToken($pimple);
 
-        $pimple[ClientAccessToken::getName()] = fn () => new ClientAccessToken(
-            $pimple[Config::getName()],
-            $pimple[Client::getName()]
-        );
+        $pimple[ClientAccessToken::getName()] = fn () => new ClientAccessToken($pimple);
 
-        $pimple[TouTiaoAccessToken::getName()] = fn () => new TouTiaoAccessToken(
-            $pimple[Config::getName()],
-            $pimple[Client::getName()]
-        );
+        $pimple[TouTiaoAccessToken::getName()] = fn () => new TouTiaoAccessToken($pimple);
     }
 }

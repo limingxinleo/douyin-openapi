@@ -16,6 +16,7 @@ use Fan\DouYin\OpenApi\AccessToken\AccessTokenProvider;
 use Fan\DouYin\OpenApi\Http\ClientProvider;
 use JetBrains\PhpStorm\ArrayShape;
 use Pimple\Container;
+use Psr\SimpleCache\CacheInterface;
 
 /**
  * @property Config\Config $config
@@ -23,6 +24,7 @@ use Pimple\Container;
  * @property AccessToken\UserAccessToken $user_access_token
  * @property AccessToken\TouTiaoAccessToken $tou_tiao_access_token
  * @property Http\Client $http
+ * @property CacheInterface $cache
  */
 class Application
 {
