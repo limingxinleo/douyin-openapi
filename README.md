@@ -1,5 +1,5 @@
-# component-creator
+# 抖音 OpenAPI
 
 ```
-composer create-project hyperf/component-creator
+composer require limingxinleo/douyin-openapi
 ```
