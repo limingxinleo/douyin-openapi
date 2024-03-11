@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace Fan\DouYin\OpenApi\AccessToken;
 
+use JetBrains\PhpStorm\ArrayShape;
+
 class ClientAccessToken extends AccessToken
 {
     public static function getName(): string
@@ -33,17 +35,10 @@ class ClientAccessToken extends AccessToken
         ];
     }
 
-    public function getToken(): string
+    #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int'])]
+    public function getToken(): array
     {
-        // {
-        //     "access_token": "clt.75c380db41e815978a733994d96f5d23RqilUxH48iobyWhbIOQFo******",
-        //     "description": "",
-        //     "error_code": 0,
-        //     "expires_in": 7200
-        // }
-        $result = $this->request();
-
-        return $result['access_token'];
+        return $this->request();
     }
 
     public function getHeaders(): array

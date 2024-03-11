@@ -30,5 +30,10 @@ class AccessTokenProvider implements ServiceProviderInterface
             $pimple[Config::getName()],
             $pimple[Client::getName()]
         );
+
+        $pimple[TouTiaoAccessToken::getName()] = fn () => new TouTiaoAccessToken(
+            $pimple[Config::getName()],
+            $pimple[Client::getName()]
+        );
     }
 }

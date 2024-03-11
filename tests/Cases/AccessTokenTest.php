@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases;
 
+use Hyperf\Codec\Json;
 use HyperfTest\ApplicationStub;
 
 /**
@@ -27,5 +28,24 @@ class AccessTokenTest extends AbstractTestCase
         $token = $application->client_access_token->getToken();
 
         $this->assertSame('clt.0cafbd032b7211ab4023043e0a75c5aa3hBvmjK7dfwZiFz1C255GPrk7i', $token);
+    }
+
+    public function testWebCastMateInfo()
+    {
+        $application = ApplicationStub::mockApplication();
+
+        $res = $application->http->client($application->tou_tiao_access_token)->request(
+            'POST',
+            'https://webcast.bytedance.com/api/webcastmate/info',
+            [
+                'json' => [
+                    'token' => 'xxx',
+                ],
+            ]
+        );
+
+        $data = Json::decode((string) $res->getBody());
+
+        $this->assertSame(40002, $data['errcode']);
     }
 }

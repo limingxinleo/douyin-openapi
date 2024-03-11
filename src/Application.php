@@ -21,6 +21,7 @@ use Pimple\Container;
  * @property Config\Config $config
  * @property AccessToken\ClientAccessToken $client_access_token
  * @property AccessToken\UserAccessToken $user_access_token
+ * @property AccessToken\TouTiaoAccessToken $tou_tiao_access_token
  * @property Http\Client $http
  */
 class Application

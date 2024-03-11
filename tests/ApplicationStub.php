@@ -24,8 +24,8 @@ class ApplicationStub
     public static function mockApplication(): Application
     {
         $application = new Application([
-            'client_key' => 'xx',
-            'client_secret' => 'xxx',
+            'client_key' => 'ttcf9eb92350af05b110',
+            'client_secret' => '4ea43a0b800d87c36ea5cd10ae2ca8a6ede1ce3b',
         ]);
 
         $rel = new ReflectionClass($application);
@@ -41,6 +41,10 @@ class ApplicationStub
                         'access_token' => 'clt.0cafbd032b7211ab4023043e0a75c5aa3hBvmjK7dfwZiFz1C255GPrk7i',
                         'expires_in' => 7200,
                     ],
+                ],
+                'https://webcast.bytedance.com/api/webcastmate/info' => [
+                    'errcode' => 40002,
+                    'errmsg' => "you don't have permission",
                 ],
             };
 
