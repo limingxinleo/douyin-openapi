@@ -45,4 +45,9 @@ class ClientAccessToken extends AccessToken
     {
         return [];
     }
+
+    public function store(array $token): array
+    {
+        // TODO: Implement store() method.
+    }
 }

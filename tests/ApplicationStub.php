@@ -13,16 +13,24 @@ declare(strict_types=1);
 namespace HyperfTest;
 
 use Fan\DouYin\OpenApi\Application;
+use Fan\DouYin\OpenApi\Cache\MemoryCache;
 use Fan\DouYin\OpenApi\Http\Client;
 use GuzzleHttp\Psr7\Response;
 use Hyperf\Codec\Json;
+use Hyperf\Context\ApplicationContext;
 use Mockery;
+use Psr\Container\ContainerInterface;
+use Psr\SimpleCache\CacheInterface;
 use ReflectionClass;
 
 class ApplicationStub
 {
     public static function mockApplication(): Application
     {
+        ApplicationContext::setContainer($container = Mockery::mock(ContainerInterface::class));
+        $container->shouldReceive('has')->with(CacheInterface::class)->andReturnTrue();
+        $container->shouldReceive('get')->with(CacheInterface::class)->andReturn(new MemoryCache());
+
         $application = new Application([
             'client_key' => 'ttcf9eb92350af05b110',
             'client_secret' => '4ea43a0b800d87c36ea5cd10ae2ca8a6ede1ce3b',

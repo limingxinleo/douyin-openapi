@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Fan\DouYin\OpenApi;
 
 use Fan\DouYin\OpenApi\AccessToken\AccessTokenProvider;
+use Fan\DouYin\OpenApi\Cache\CacheProvider;
 use Fan\DouYin\OpenApi\Http\ClientProvider;
 use JetBrains\PhpStorm\ArrayShape;
 use Pimple\Container;
@@ -33,6 +34,7 @@ class Application
     private array $providers = [
         AccessTokenProvider::class,
         ClientProvider::class,
+        CacheProvider::class,
     ];
 
     public function __construct(

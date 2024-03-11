@@ -19,4 +19,6 @@ interface AccessTokenInterface
     public function buildOAuthBody(): array;
 
     public function getHeaders(): array;
+
+    public function store(array $token): array;
 }

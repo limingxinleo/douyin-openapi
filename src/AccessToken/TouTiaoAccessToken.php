@@ -39,9 +39,19 @@ class TouTiaoAccessToken extends AccessToken
     }
 
     #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int'])]
-    public function getToken(): array
+    public function getToken(bool $fresh = false): array
     {
-        return $this->request();
+        $result = null;
+        if (! $fresh) {
+            $result = $this->cache()->get($this->storeKey(self::getName()));
+            var_dump($result);
+        }
+
+        if (! $result) {
+            $result = $this->store($this->request());
+        }
+
+        return $result;
     }
 
     public function handleResponse(ResponseInterface $response): array
@@ -60,5 +70,14 @@ class TouTiaoAccessToken extends AccessToken
         return [
             'x-token' => $this->getToken()['access_token'],
         ];
+    }
+
+    public function store(
+        #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int'])]
+        array $token
+    ): array {
+        $this->cache()->set($this->storeKey(self::getName()), $token, $token['expires_in'] - 600);
+
+        return $token;
     }
 }

@@ -33,4 +33,9 @@ class UserAccessToken extends AccessToken
     {
         return [];
     }
+
+    public function store(array $token): array
+    {
+        return [];
+    }
 }
