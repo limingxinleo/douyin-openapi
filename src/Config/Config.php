@@ -26,8 +26,8 @@ class Config implements ProviderInterface
 
     public function __construct(
         #[ArrayShape([
-            'client_key' => 'string',
-            'client_secret' => 'string',
+            'app_id' => 'string',
+            'app_secret' => 'string',
             'http' => [
                 'base_uri' => 'string',
                 'timeout' => 'int',
@@ -37,6 +37,16 @@ class Config implements ProviderInterface
         array $config
     ) {
         $this->config = array_replace_recursive($this->config, $config);
+    }
+
+    public function getAppId(): string
+    {
+        return $this->config['app_id'] ?? '';
+    }
+
+    public function getAppSecret(): string
+    {
+        return $this->config['app_secret'] ?? '';
     }
 
     public function getClientKey(): string

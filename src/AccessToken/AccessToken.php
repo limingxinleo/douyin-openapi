@@ -54,7 +54,7 @@ abstract class AccessToken implements AccessTokenInterface, ProviderInterface
 
     public function storeKey(string $name): string
     {
-        return sprintf('token:%s:%s', $name, $this->config->getClientKey());
+        return sprintf('token:%s:%s', $name, $this->config->getAppId());
     }
 
     public function cache(): CacheInterface

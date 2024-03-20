@@ -32,8 +32,8 @@ class TouTiaoAccessToken extends AccessToken
     public function buildOAuthBody(): array
     {
         return [
-            'appid' => $this->config->getClientKey(),
-            'secret' => $this->config->getClientSecret(),
+            'appid' => $this->config->getAppId(),
+            'secret' => $this->config->getAppSecret(),
             'grant_type' => 'client_credential',
         ];
     }
