@@ -15,8 +15,10 @@ namespace Fan\DouYin\OpenApi;
 use Fan\DouYin\OpenApi\AccessToken\AccessTokenProvider;
 use Fan\DouYin\OpenApi\Cache\CacheProvider;
 use Fan\DouYin\OpenApi\Http\ClientProvider;
+use Fan\DouYin\OpenApi\Kernel\LoggerProvider;
 use JetBrains\PhpStorm\ArrayShape;
 use Pimple\Container;
+use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 
 /**
@@ -26,6 +28,7 @@ use Psr\SimpleCache\CacheInterface;
  * @property AccessToken\TouTiaoAccessToken $tou_tiao_access_token
  * @property Http\Client $http
  * @property CacheInterface $cache
+ * @property ?LoggerInterface $logger
  */
 class Application
 {
@@ -35,6 +38,7 @@ class Application
         AccessTokenProvider::class,
         ClientProvider::class,
         CacheProvider::class,
+        LoggerProvider::class,
     ];
 
     public function __construct(

@@ -10,21 +10,18 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Fan\DouYin\OpenApi\Cache;
+namespace Fan\DouYin\OpenApi\Kernel;
 
-use Fan\DouYin\OpenApi\Kernel\HasContainer;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Psr\SimpleCache\CacheInterface;
+use Psr\Log\LoggerInterface;
 
-class CacheProvider implements ServiceProviderInterface
+class LoggerProvider implements ServiceProviderInterface
 {
     use HasContainer;
 
     public function register(Container $pimple)
     {
-        $cache = $this->get(CacheInterface::class);
-
-        $pimple['cache'] = $cache ?? new MemoryCache();
+        $pimple['logger'] = $this->get(LoggerInterface::class);
     }
 }
