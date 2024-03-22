@@ -74,7 +74,7 @@ class Config implements ProviderInterface
         return $this->config;
     }
 
-    public function get(string $key, mixed $default): mixed
+    public function get(string $key, mixed $default = null): mixed
     {
         return Arr::get($this->config, $key, $default);
     }

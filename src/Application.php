@@ -47,8 +47,11 @@ class Application
 
     public function __construct(
         #[ArrayShape([
-            'client_key' => 'string',
-            'client_secret' => 'string',
+            'app_id' => 'string',
+            'app_secret' => 'string',
+            'payment' => [
+                'salt' => 'string',
+            ],
             'http' => [
                 'base_uri' => 'string',
                 'timeout' => 'int',
