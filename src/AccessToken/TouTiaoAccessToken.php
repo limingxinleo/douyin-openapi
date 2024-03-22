@@ -44,7 +44,7 @@ class TouTiaoAccessToken extends AccessToken
         $result = null;
         if (! $fresh) {
             $result = $this->cache()->get($this->storeKey(self::getName()));
-            if ($result['expired_at'] < time()) {
+            if ($result && $result['expired_at'] < time()) {
                 $result = null;
             }
         }
