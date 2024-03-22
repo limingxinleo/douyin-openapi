@@ -15,6 +15,8 @@ namespace Fan\DouYin\OpenApi\Payment;
 use Fan\DouYin\OpenApi\Application;
 use Fan\DouYin\OpenApi\Config\Config;
 use Fan\DouYin\OpenApi\ProviderInterface;
+use Hyperf\Collection\Arr;
+use JetBrains\PhpStorm\ArrayShape;
 use Pimple\Container;
 
 class Payment implements ProviderInterface
@@ -34,6 +36,32 @@ class Payment implements ProviderInterface
         return 'payment';
     }
 
+    /**
+     * 回调验签.
+     */
+    public function signNotify(
+        #[ArrayShape([
+            'timestamp' => 'string',
+            'nonce' => 'string',
+            'msg' => 'string',
+            'msg_signature' => 'string',
+            'type' => 'string',
+        ])]
+        array $map
+    ): string {
+        $data = Arr::only($map, ['timestamp', 'nonce', 'msg']);
+        $data['token'] = $this->config->get('payment.token');
+
+        sort($data, SORT_STRING);
+
+        $string = implode('', $data);
+
+        return sha1($string);
+    }
+
+    /**
+     * 支付签名.
+     */
     public function sign(array $map): string
     {
         $rList = [];

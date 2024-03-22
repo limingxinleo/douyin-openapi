@@ -38,6 +38,7 @@ class ApplicationStub
             'app_secret' => '4ea43a0b800d87c36ea5cd10ae2ca8a6ede1ce3b',
             'payment' => [
                 'salt' => 'xxxx',
+                'token' => 'xxxx',
             ],
         ]);
 

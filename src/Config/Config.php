@@ -31,6 +31,7 @@ class Config implements ProviderInterface
             'app_secret' => 'string',
             'payment' => [
                 'salt' => 'string',
+                'token' => 'string',
             ],
             'http' => [
                 'base_uri' => 'string',
