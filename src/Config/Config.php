@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Fan\DouYin\OpenApi\Config;
 
 use Fan\DouYin\OpenApi\ProviderInterface;
+use Hyperf\Collection\Arr;
 use JetBrains\PhpStorm\ArrayShape;
 
 class Config implements ProviderInterface
@@ -28,6 +29,9 @@ class Config implements ProviderInterface
         #[ArrayShape([
             'app_id' => 'string',
             'app_secret' => 'string',
+            'payment' => [
+                'salt' => 'string',
+            ],
             'http' => [
                 'base_uri' => 'string',
                 'timeout' => 'int',
@@ -68,6 +72,11 @@ class Config implements ProviderInterface
     public function toArray(): array
     {
         return $this->config;
+    }
+
+    public function get(string $key, mixed $default): mixed
+    {
+        return Arr::get($this->config, $key, $default);
     }
 
     public static function getName(): string

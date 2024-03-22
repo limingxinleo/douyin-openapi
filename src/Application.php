@@ -16,6 +16,8 @@ use Fan\DouYin\OpenApi\AccessToken\AccessTokenProvider;
 use Fan\DouYin\OpenApi\Cache\CacheProvider;
 use Fan\DouYin\OpenApi\Http\ClientProvider;
 use Fan\DouYin\OpenApi\Kernel\LoggerProvider;
+use Fan\DouYin\OpenApi\Payment\Payment;
+use Fan\DouYin\OpenApi\Payment\PaymentProvider;
 use JetBrains\PhpStorm\ArrayShape;
 use Pimple\Container;
 use Psr\Log\LoggerInterface;
@@ -29,6 +31,7 @@ use Psr\SimpleCache\CacheInterface;
  * @property Http\Client $http
  * @property CacheInterface $cache
  * @property ?LoggerInterface $logger
+ * @property Payment $payment
  */
 class Application
 {
@@ -39,6 +42,7 @@ class Application
         ClientProvider::class,
         CacheProvider::class,
         LoggerProvider::class,
+        PaymentProvider::class,
     ];
 
     public function __construct(
