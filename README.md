@@ -43,7 +43,7 @@ $json = [
     'nonce' => 'xxx', // 无任何业务影响, 仅影响加签内容, 使同一请求的多次签名不同
 ];
 $json['sign'] = $dy->payment->sign($json);
-$json['app_id'] = $app->app_id;
+$json['app_id'] = $dy->config->getAppId();
 
 $res = $client->post('/api/apps/ecpay/v1/create_order', [
     'json' => $json,
