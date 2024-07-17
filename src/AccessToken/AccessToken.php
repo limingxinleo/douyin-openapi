@@ -19,6 +19,7 @@ use Fan\DouYin\OpenApi\Exception\RuntimeException;
 use Fan\DouYin\OpenApi\Http\Client;
 use Fan\DouYin\OpenApi\ProviderInterface;
 use GuzzleHttp\RequestOptions;
+use JetBrains\PhpStorm\ArrayShape;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\SimpleCache\CacheInterface;
@@ -65,5 +66,17 @@ abstract class AccessToken implements AccessTokenInterface, ProviderInterface
         }
 
         return $cache;
+    }
+
+    #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int', 'expired_at' => 'int'])]
+    public function store(array $token): array
+    {
+        $expiresIn = $token['expires_in'] - 600;
+
+        $token = array_merge($token, ['expired_at' => time() + $expiresIn]);
+
+        $this->cache()->set($this->storeKey(static::getName()), $token, $expiresIn);
+
+        return $token;
     }
 }

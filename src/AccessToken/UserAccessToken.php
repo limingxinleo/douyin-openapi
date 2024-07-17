@@ -12,8 +12,6 @@ declare(strict_types=1);
 
 namespace Fan\DouYin\OpenApi\AccessToken;
 
-use JetBrains\PhpStorm\ArrayShape;
-
 class UserAccessToken extends AccessToken
 {
     public static function getName(): string
@@ -32,12 +30,6 @@ class UserAccessToken extends AccessToken
     }
 
     public function getHeaders(): array
-    {
-        return [];
-    }
-
-    #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int', 'expired_at' => 'int'])]
-    public function store(array $token): array
     {
         return [];
     }

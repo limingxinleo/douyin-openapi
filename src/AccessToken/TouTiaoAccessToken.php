@@ -73,18 +73,4 @@ class TouTiaoAccessToken extends AccessToken
             'x-token' => $this->getToken()['access_token'],
         ];
     }
-
-    #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int', 'expired_at' => 'int'])]
-    public function store(
-        #[ArrayShape(['access_token' => 'string', 'expires_in' => 'int'])]
-        array $token
-    ): array {
-        $expiresIn = $token['expires_in'] - 600;
-
-        $token = array_merge($token, ['expired_at' => time() + $expiresIn]);
-
-        $this->cache()->set($this->storeKey(self::getName()), $token, $expiresIn);
-
-        return $token;
-    }
 }

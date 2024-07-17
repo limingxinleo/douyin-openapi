@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Fan\DouYin\OpenApi\Http;
 
-use Fan\DouYin\OpenAPi\Config\Config;
+use Fan\DouYin\OpenApi\Config\Config;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
